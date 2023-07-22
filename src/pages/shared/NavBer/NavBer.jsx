@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const NavBer = () => {
     const navList = <>
-       <li> <Link>Home</Link></li>
+       <li> <Link to="/">Home</Link></li>
        <li> <Link>College</Link></li>
        <li> <Link>Admission</Link></li>
        <li> <Link>My College</Link></li>
