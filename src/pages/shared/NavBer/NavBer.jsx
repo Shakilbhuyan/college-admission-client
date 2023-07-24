@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../Provider/AuthProvider';
 
 const NavBer = () => {
+    const { user, logOut } = useContext(AuthContext);
+    const handleLogOut = () => {
+        logOut()
+            .then(() => { })
+            .catch(error => console.log(error))
+    }
     const navList = <>
         <li> <Link to="/">Home</Link></li>
-        <li> <Link>College</Link></li>
+        <li> <Link to="allcollege">College</Link></li>
         <li> <Link>Admission</Link></li>
         <li> <Link>My College</Link></li>
         <div className="form-control">
@@ -12,8 +19,9 @@ const NavBer = () => {
         </div>
 
     </>
+
     return (
-        <div className="navbar fixed z-10 bg-opacity-30 max-w-screen-xl bg-white text-black">
+        <div className="navbar fixed z-10 bg-opacity-30 max-w-screen-xl bg-white text-black ">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -31,7 +39,15 @@ const NavBer = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <a className="btn">Button</a>
+                {
+
+                    user ? <div className='flex'>
+
+                        <img src={user.photoURL} className='block w-16 h-16 rounded-full' />
+                        <button onClick={handleLogOut} className="btn bg-blue-400">Logout</button>
+                    </div> :
+                        <button className="btn bg-blue-700"><Link to="/login">Login</Link></button>
+                }
             </div>
         </div>
     );
